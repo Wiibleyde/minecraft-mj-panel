@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% include "fragments/import.html" %}
+        
+        <title>Creatia - Connexion</title>
+    </head>
+    <header>
+        {% include "fragments/message.html" %}
+    </header>
+    <body class="bg-gray-100 dark:bg-gray-800">
+        <div class="flex justify-center items-center h-screen">
+            <div class="bg-white dark:bg-gray-700 rounded-md shadow-lg p-8 w-96">
+                <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Se connecter :</h2>
+                {% block login %}
+                <form method="post" class="flex flex-col">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-4 dark:text-black">
+                        <label for="usernameLogin" class="block text-gray-700 dark:text-white font-bold mb-2">Nom d'utilisateur</label>
+                        {{ form.usernameLogin(id="usernameLogin", class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-black leading-tight focus:outline-none focus:shadow-outline') }}
+                    </div>
+                    <div class="mb-4 dark:text-white">
+                        <label for="passwordLogin" class="block text-gray-700 dark:text-white font-bold mb-2">Mot de passe</label>
+                        {{ form.passwordLogin(id="passwordLogin", class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-black leading-tight focus:outline-none focus:shadow-outline') }}
+                    </div>
+                    <div>
+                        {{ form.submitLogin(class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
+                    </div>
+                </form>
+                {% endblock %}
+                <p class="mt-4 text-gray-700 dark:text-gray-300">Vous n'avez pas de compte ? <a href="/register" class="text-blue-500 dark:text-blue-400 font-bold hover:text-blue-700">S'enregistrer</a></p>
+            </div>
+        </div>
+    </body>
+    <footer>
+        {% include "fragments/footer.html" %}
+    </footer>
+</html>

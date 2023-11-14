@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: TimeAttack
+    volumes:
+      - ./database:/var/lib/mysql

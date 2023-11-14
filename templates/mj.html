@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        {% include "fragments/import.html" %}
+        
+        <title>Creatia - {{ PageName }}</title>
+    </head>
+    <header>
+        {% include "fragments/message.html" %}
+    </header>
+    <body class="bg-gray-100 dark:bg-gray-800 text-black dark:text-white">
+        <div class="flex flex-col">
+            <div class="text-5xl">
+                <h1 class="text-center">Bienvenue sur la page de MJ</h1>
+                <p class="text-center">Pour controller un joueur, entrez son pseudonyme ici :</p>
+                <input type="text" name="pseudo" id="pseudo" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4">
+                <p class="text-center">Pour controller tous les joueurs, écrivez @a</p>
+            </div>
+            <div class="flex flex-row justify-center items-center">
+                <div>
+                    <p class="text-center">Gamemode du joueur :</p>
+                    <div class="flex flex-col justify-center items-center">
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeCreative()">Mettre le joueur en créatif</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeSurvival()">Mettre le joueur en survie</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeSpectator()">Mettre le joueur en spectateur</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeAdventure()">Mettre le joueur en aventure</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-center">Gamemode du joueur :</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function gamemodeCreative() {
+            let pseudo = document.getElementById("pseudo").value;
+            axios.get(`/mjAction?action=gamemode&mode=creative&pseudo=${pseudo}`)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            
+        }
+
+        function gamemodeSurvival() {
+            let pseudo = document.getElementById("pseudo").value;
+            axios.get(`/mjAction?action=gamemode&mode=survival&pseudo=${pseudo}`)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function gamemodeSpectator() {
+            let pseudo = document.getElementById("pseudo").value;
+            axios.get(`/mjAction?action=gamemode&mode=spectator&pseudo=${pseudo}`)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function gamemodeAdventure() {
+            let pseudo = document.getElementById("pseudo").value;
+            console.log(`/mjAction?action=gamemode=adventure&pseudo=${pseudo}`);
+            axios.get(`/mjAction?action=gamemode&mode=adventure&pseudo=${pseudo}`)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    </script>
+    <footer>
+        {% include "fragments/footer.html" %}
+    </footer>
+</html>
