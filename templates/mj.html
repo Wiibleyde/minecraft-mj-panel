@@ -14,75 +14,121 @@
         {% include "fragments/message.html" %}
     </header>
     <body class="bg-gray-100 dark:bg-gray-800 text-black dark:text-white">
+        <div class="z-[100] fixed bottom-16 right-0 w-2/5" id="message"></div>
         <div class="flex flex-col">
             <div class="text-5xl">
                 <h1 class="text-center">Bienvenue sur la page de MJ</h1>
-                <p class="text-center">Pour controller un joueur, entrez son pseudonyme ici :</p>
-                <input type="text" name="pseudo" id="pseudo" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4">
-                <p class="text-center">Pour controller tous les joueurs, écrivez @a</p>
+                <div class="flex flex-col justify-center items-center text-xl">
+                    <p class="text-center">Pour controller un joueur, entrez son pseudonyme ici :</p>
+                    <p class="text-center">Pour controller tous les joueurs, écrivez @a</p>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <input type="text" name="pseudo" id="pseudo" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 1">
+                    <input type="text" name="pseudo2" id="pseudo2" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 2">
+                </div>
             </div>
-            <div class="flex flex-row justify-center items-center">
+            <div class="grid grid-cols-5">
                 <div>
                     <p class="text-center">Gamemode du joueur :</p>
                     <div class="flex flex-col justify-center items-center">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeCreative()">Mettre le joueur en créatif</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeSurvival()">Mettre le joueur en survie</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeSpectator()">Mettre le joueur en spectateur</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemodeAdventure()">Mettre le joueur en aventure</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('creative')">Mettre le joueur en créatif</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('survival')">Mettre le joueur en survie</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('spectator')">Mettre le joueur en spectateur</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('adventure')">Mettre le joueur en aventure</button>
                     </div>
                 </div>
                 <div>
-                    <p class="text-center">Gamemode du joueur :</p>
+                    <p class="text-center">TP :</p>
+                    <div class="flex flex-col justify-center items-center">
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="tpToPlayer(false)">TP le joueur 1 sur le joueur 2</button>
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="tpToPlayer(true)">TP le joueur 2 sur le joueur 1</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-center">Give :</p>
+                    <div class="flex flex-col justify-center items-center">
+                        <p class="text-center">Item :</p>
+                        <input type="text" name="item" id="item" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="minecraft:stone">
+                        <p class="text-center">Quantité :</p>
+                        <input type="text" name="amount" id="amount" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="64">
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="give()">Give</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-center">Invisibilité :</p>
+                    <div class="flex flex-col justify-center items-center">
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="invisibility()">Rendre le joueur invisible</button>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
     <script>
-        function gamemodeCreative() {
+        let responseVar="";
+
+        function gamemode(gamemode) {
             let pseudo = document.getElementById("pseudo").value;
-            axios.get(`/mjAction?action=gamemode&mode=creative&pseudo=${pseudo}`)
+            axios.get(`/mjAction?action=gamemode&mode=${gamemode}&pseudo=${pseudo}`)
                 .then(function (response) {
-                    console.log(response);
+                    responseVar = response
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    responseVar = error;
                 });
-
-            
+            console.log(responseVar);
+            // sendConfirmationMessage(responseVar);
         }
 
-        function gamemodeSurvival() {
+        function tpToPlayer(reverse) {
             let pseudo = document.getElementById("pseudo").value;
-            axios.get(`/mjAction?action=gamemode&mode=survival&pseudo=${pseudo}`)
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            let pseudo2 = document.getElementById("pseudo2").value;
+            if (!reverse) {
+                axios.get(`/mjAction?action=tp&pseudo=${pseudo}&pseudo2=${pseudo2}`)
+                    .then(function (response) {
+                        responseVar = response.data;
+                    })
+                    .catch(function (error) {
+                        responseVar = error;
+                    });
+            } else {
+                axios.get(`/mjAction?action=tp&pseudo=${pseudo2}&pseudo2=${pseudo}`)
+                    .then(function (response) {
+                        responseVar = response.data;
+                    })
+                    .catch(function (error) {
+                        responseVar = error;
+                    });
+            }
+            console.log(responseVar);
+            // sendConfirmationMessage(responseVar);
         }
 
-        function gamemodeSpectator() {
+        function give() {
             let pseudo = document.getElementById("pseudo").value;
-            axios.get(`/mjAction?action=gamemode&mode=spectator&pseudo=${pseudo}`)
+            let item = document.getElementById("item").value;
+            let amount = document.getElementById("amount").value;
+            axios.get(`/mjAction?action=give&pseudo=${pseudo}&item=${item}&amount=${amount}`)
                 .then(function (response) {
-                    console.log(response);
+                    responseVar = response.data;
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    responseVar = error;
                 });
+            console.log(responseVar);
+            // sendConfirmationMessage(responseVar);
         }
-
-        function gamemodeAdventure() {
+    
+        function invisibility() {
             let pseudo = document.getElementById("pseudo").value;
-            console.log(`/mjAction?action=gamemode=adventure&pseudo=${pseudo}`);
-            axios.get(`/mjAction?action=gamemode&mode=adventure&pseudo=${pseudo}`)
+            axios.get(`/mjAction?action=invisibility&pseudo=${pseudo}`)
                 .then(function (response) {
-                    console.log(response);
+                    responseVar = response.data;
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    responseVar = error;
                 });
+            console.log(responseVar);
+            // sendConfirmationMessage(responseVar);
         }
     </script>
     <footer>

@@ -130,7 +130,21 @@ def mjAction():
         mode = request.args.get('mode')
         pseudo = request.args.get('pseudo')
         response = rcon.send_command(f"gamemode {mode} {pseudo}")
-        flash(response, 'success')
+        return response
+    elif action == 'tp':
+        pseudo = request.args.get('pseudo')
+        pseudo2 = request.args.get('pseudo2')
+        response = rcon.send_command(f"tp {pseudo} {pseudo2}")
+        return response
+    elif action == 'give':
+        pseudo = request.args.get('pseudo')
+        item = request.args.get('item')
+        amount = request.args.get('amount')
+        response = rcon.send_command(f"give {pseudo} {item} {amount}")
+        return response
+    elif action == 'invisibility':
+        pseudo = request.args.get('pseudo')
+        response = rcon.send_command(f"effect give {pseudo} invisibility 1000000 255 true")
         return response
 
 
