@@ -60,6 +60,13 @@
                         <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="invisibility()">Rendre le joueur invisible</button>
                     </div>
                 </div>
+                <div>
+                    <p class="text-center">Annonce :</p>
+                    <div class="flex flex-col justify-center items-center">
+                        <p class="text-center">Message :</p>
+                        <input type="text" name="messageToSend" id="messageToSend" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="Message">
+                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="announce()">Annoncer</button>
+                    </div>
             </div>
         </div>
     </body>
@@ -121,6 +128,19 @@
         function invisibility() {
             let pseudo = document.getElementById("pseudo").value;
             axios.get(`/mjAction?action=invisibility&pseudo=${pseudo}`)
+                .then(function (response) {
+                    responseVar = response.data;
+                })
+                .catch(function (error) {
+                    responseVar = error;
+                });
+            console.log(responseVar);
+            // sendConfirmationMessage(responseVar);
+        }
+
+        function announce() {
+            let message = document.getElementById("messageToSend").value;
+            axios.get(`/mjAction?action=announce&message=${message}`)
                 .then(function (response) {
                     responseVar = response.data;
                 })

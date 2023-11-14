@@ -146,6 +146,10 @@ def mjAction():
         pseudo = request.args.get('pseudo')
         response = rcon.send_command(f"effect give {pseudo} invisibility 1000000 255 true")
         return response
+    elif action == 'announce':
+        message = request.args.get('message')
+        response = rcon.send_command(f"tellraw @a {{\"text\":\"[ANNONCE] {message}\",\"color\":\"red\"}}")
+        return response
 
 
 if __name__ == '__main__':
