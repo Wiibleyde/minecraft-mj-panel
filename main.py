@@ -6,6 +6,7 @@ from hashlib import sha256
 import argparse
 from urllib.parse import urlparse, urljoin
 import logging
+import os
 
 from src.logger import Logger
 from src.forms import LoginForm, RegisterForm
@@ -156,7 +157,12 @@ if __name__ == '__main__':
     config = Config("./config.yml")
     logger = Logger()
     rcon = MinecraftRcon()
-    data = Database(f"{config.getDBHost()}", config.getDBUser(), config.getDBPassword(), config.getDBDatabase())
+    print(os.getenv("STARTED_DOCKER"))
+    if os.getenv("STARTED_DOCKER") == "True":
+        logger.info("Running in docker")
+        data = Database("db", config.getDBUser(), config.getDBPassword(), config.getDBDatabase())
+    else:
+        data = Database(f"{config.getDBHost()}", config.getDBUser(), config.getDBPassword(), config.getDBDatabase())
     args = readArgs()
     logger.info("Starting program")
     port = 9123

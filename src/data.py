@@ -12,17 +12,26 @@ class User:
         return f"User(id={self.id}, username={self.username}, password={self.password}, is_admin={self.is_admin})"
 
 class Database:
-    def __init__(self, host, user, password, database):
+    def __init__(self, host, user, password, database, docker=False):
         self.host = host
         self.user = user
         self.password = password
         self.database = database
-        self.conn = mysql.connector.connect(
-            host=self.host,
-            user=self.user,
-            password=self.password,
-            database=self.database
-        )
+        if docker:
+            self.conn = mysql.connector.connect(
+                host=self.host,
+                user=self.user,
+                password=self.password,
+                database=self.database
+            )
+        else:
+            self.conn = mysql.connector.connect(
+                host=self.host,
+                port=3306,
+                user=self.user,
+                password=self.password,
+                database=self.database
+            )
         self.cursor = self.conn.cursor()
         self.createTables()
 

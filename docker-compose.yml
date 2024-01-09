@@ -12,3 +12,16 @@ services:
       MYSQL_DATABASE: TimeAttack
     volumes:
       - ./database:/var/lib/mysql
+
+  mj-panel:
+    build: .
+    image: wiibleyde/mj-panel:latest
+    container_name: mj-panel
+    restart: unless-stopped
+    ports:
+      - "9123:9123"
+    volumes:
+      - ./logs/:/app/logs
+      - ./config.yml:/app/config.yml
+    environment:
+      - STARTED_DOCKER=True
