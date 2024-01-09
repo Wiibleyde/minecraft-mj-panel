@@ -12,24 +12,24 @@
     <header>
         {% include "fragments/message.html" %}
     </header>
-    <body class="dark:bg-gray-800">
+    <body class="bg-gray-800">
         <div class="flex justify-center items-center h-screen">
-            <div class="bg-white dark:bg-gray-700 rounded-md shadow-lg p-8 w-96">
+            <div class="bg-gray-700 rounded-md shadow-lg p-8 w-96">
                 <h2 class="text-2xl font-bold mb-6 text-white">S'enregister :</h2>
                 {% block register %}
                 <form method="post" class="flex flex-col">
                     {{ form.hidden_tag() }}
                     <div class="mb-4">
                         <label class="block text-white font-bold mb-2" for="username">Nom d'utilisateur:</label>
-                        {{ form.usernameRegister(class='shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline dark:text-black', id="username") }}
+                        {{ form.usernameRegister(class='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black', id="username") }}
                     </div>
                     <div class="mb-4">
                         <label class="block text-white font-bold mb-2" for="password">Mot de passe:</label>
-                        {{ form.passwordRegister(class='shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline dark:text-black', id="password") }}
+                        {{ form.passwordRegister(class='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black', id="password") }}
                     </div>
                     <div class="mb-4">
                         <label class="block text-white font-bold mb-2" for="confirm-password">Confirmer le mot de passe:</label>
-                        {{ form.confirmPasswordRegister(class='shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline dark:text-black', id="confirm-password") }}
+                        {{ form.confirmPasswordRegister(class='shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black', id="confirm-password") }}
                     </div>
                     <div>
                         {{ form.submitRegister(class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}

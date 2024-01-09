@@ -13,7 +13,7 @@
     <header>
         {% include "fragments/message.html" %}
     </header>
-    <body class="bg-gray-100 dark:bg-gray-800 text-black dark:text-white">
+    <body class="bg-gray-800 text-white">
         <div class="z-[100] fixed bottom-16 right-0 w-2/5" id="message"></div>
         <div class="flex flex-col">
             <div class="text-5xl">
@@ -23,49 +23,49 @@
                     <p class="text-center">Pour controller tous les joueurs, écrivez @a</p>
                 </div>
                 <div class="flex flex-col justify-center items-center">
-                    <input type="text" name="pseudo" id="pseudo" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 1">
-                    <input type="text" name="pseudo2" id="pseudo2" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 2">
+                    <input type="text" name="pseudo" id="pseudo" class="m-5 px-2 py-1 bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 1">
+                    <input type="text" name="pseudo2" id="pseudo2" class="m-5 px-2 py-1 bg-gray-700 rounded-md text-center w-1/4" placeholder="Joueur 2">
                 </div>
             </div>
             <div class="grid grid-cols-5">
                 <div>
                     <p class="text-center">Gamemode du joueur :</p>
                     <div class="flex flex-col justify-center items-center">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('creative')">Mettre le joueur en créatif</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('survival')">Mettre le joueur en survie</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('spectator')">Mettre le joueur en spectateur</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="gamemode('adventure')">Mettre le joueur en aventure</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="gamemode('creative')">Mettre le joueur en créatif</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="gamemode('survival')">Mettre le joueur en survie</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="gamemode('spectator')">Mettre le joueur en spectateur</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="gamemode('adventure')">Mettre le joueur en aventure</button>
                     </div>
                 </div>
                 <div>
                     <p class="text-center">TP :</p>
                     <div class="flex flex-col justify-center items-center">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="tpToPlayer(false)">TP le joueur 1 sur le joueur 2</button>
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="tpToPlayer(true)">TP le joueur 2 sur le joueur 1</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="tpToPlayer(false)">TP le joueur 1 sur le joueur 2</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="tpToPlayer(true)">TP le joueur 2 sur le joueur 1</button>
                     </div>
                 </div>
                 <div>
                     <p class="text-center">Give :</p>
                     <div class="flex flex-col justify-center items-center">
                         <p class="text-center">Item :</p>
-                        <input type="text" name="item" id="item" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="minecraft:stone">
+                        <input type="text" name="item" id="item" class="m-5 px-2 py-1 bg-gray-700 rounded-md text-center w-2/4" placeholder="minecraft:stone">
                         <p class="text-center">Quantité :</p>
-                        <input type="text" name="amount" id="amount" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="64">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="give()">Give</button>
+                        <input type="text" name="amount" id="amount" class="m-5 px-2 py-1 bg-gray-700 rounded-md text-center w-2/4" placeholder="64">
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="give()">Give</button>
                     </div>
                 </div>
                 <div>
                     <p class="text-center">Invisibilité :</p>
                     <div class="flex flex-col justify-center items-center">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="invisibility()">Rendre le joueur invisible</button>
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="invisibility()">Rendre le joueur invisible</button>
                     </div>
                 </div>
                 <div>
                     <p class="text-center">Annonce :</p>
                     <div class="flex flex-col justify-center items-center">
                         <p class="text-center">Message :</p>
-                        <input type="text" name="messageToSend" id="messageToSend" class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md text-center w-2/4" placeholder="Message">
-                        <button class="m-5 px-2 py-1 bg-gray-300 dark:bg-gray-700 rounded-md" onclick="announce()">Annoncer</button>
+                        <input type="text" name="messageToSend" id="messageToSend" class="m-5 px-2 py-1 bg-gray-700 rounded-md text-center w-2/4" placeholder="Message">
+                        <button class="m-5 px-2 py-1 bg-gray-700 rounded-md" onclick="announce()">Annoncer</button>
                     </div>
             </div>
         </div>
